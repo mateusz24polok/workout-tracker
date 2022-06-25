@@ -1,2 +1,2 @@
-# Nuxt 3 Minimal Starter
+# Workout tracker app
 Here further info about project
