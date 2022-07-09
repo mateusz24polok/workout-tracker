@@ -11,6 +11,8 @@
     <FormKit
       type="text"
       name="name"
+      id="username"
+      autocomplete="new-username"
       label="Your name"
       placeholder="Name"
       validation="required"
@@ -18,6 +20,7 @@
     <FormKit
       type="text"
       name="email"
+      autocomplete="new-username"
       label="Your email"
       placeholder="Email"
       validation="required|email"
@@ -26,6 +29,7 @@
       <FormKit
         type="password"
         name="password"
+        autocomplete="new-password"
         label="Password"
         validation="required|length:6|matches:/[^a-zA-Z]/"
         :validation-messages="{
@@ -36,6 +40,7 @@
       <FormKit
         type="password"
         name="password_confirm"
+        autocomplete="new-password"
         label="Confirm password"
         placeholder="Confirm password"
         validation="required|confirm"
@@ -59,6 +64,14 @@ const router = useRouter();
 const registrationForm = ref(null);
 const submitted = ref(false);
 const formData = ref({});
+
+onMounted(() => {
+  const userNameInput = document.getElementById("username");
+
+  if (userNameInput) {
+    userNameInput.focus();
+  }
+});
 
 const switchToLogin = () => {
   router.push("/login");

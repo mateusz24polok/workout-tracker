@@ -14,7 +14,7 @@
           v-if="isCloseButton"
         />
         <div class="modal__content-container m-3">
-          <slot></slot>
+          <slot />
         </div>
       </div>
     </div>

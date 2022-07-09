@@ -1,7 +1,7 @@
 <template>
   <FormKit
     type="form"
-    ref="loginForm"
+    id="loginForm"
     v-model="formData"
     form-class="px-4 py-2"
     :actions="false"
@@ -9,13 +9,16 @@
   >
     <h2 class="text-3xl mt-2 mb-4">Login!</h2>
     <FormKit
+      autocomplete="new-username"
       type="text"
+      id="username"
       name="email"
       label="Your email"
       placeholder="Email"
       validation="required|email"
     />
     <FormKit
+      autocomplete="new-password"
       type="password"
       name="password"
       label="Password"
@@ -32,25 +35,32 @@
         :style="{ 'background-color': 'red' }"
         @click="switchToLogin"
       />
-      <FormKit type="button" label="Login" @click="submitForm" />
+      <FormKit type="button" label="Login" @click="submit" />
     </div>
   </FormKit>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import { submitForm } from "@formkit/core";
 const router = useRouter();
-const loginForm = ref(null);
 const submitted = ref(false);
 const formData = ref({});
+
+onMounted(() => {
+  const userNameInput = document.getElementById("username");
+
+  if (userNameInput) {
+    userNameInput.focus();
+  }
+});
 
 const switchToLogin = () => {
   router.push("/registration");
 };
 
-const submitForm = () => {
-  const node = loginForm.value.node;
-  node.submit();
+const submit = () => {
+  submitForm("loginForm");
 };
 
 const submitHandler = async () => {
