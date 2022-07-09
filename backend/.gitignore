@@ -132,3 +132,5 @@ dist
 ### Node Patch ###
 # Serverless Webpack directories
 .webpack/
+
+config/config.ts
