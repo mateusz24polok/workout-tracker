@@ -43,6 +43,8 @@
 <script setup>
 import { ref } from "vue";
 import { submitForm } from "@formkit/core";
+import axios from "axios";
+
 const router = useRouter();
 const submitted = ref(false);
 const formData = ref({});
@@ -64,9 +66,12 @@ const submit = () => {
 };
 
 const submitHandler = async () => {
-  // Let's pretend this is an ajax request:
-  await new Promise((r) => setTimeout(r, 1000));
-  submitted.value = true;
+  const data = await axios.post("http://localhost:5000/api/v1/users/login", {
+    email: formData.value.email,
+    password: formData.value.password,
+  });
+
+  console.log(data);
 
   console.log("Submitted data", formData.value);
 };

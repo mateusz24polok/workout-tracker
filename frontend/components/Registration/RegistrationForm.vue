@@ -60,6 +60,8 @@
 
 <script setup>
 import { ref } from "vue";
+import axios from "axios";
+
 const router = useRouter();
 const registrationForm = ref(null);
 const submitted = ref(false);
@@ -83,9 +85,14 @@ const submitForm = () => {
 };
 
 const submitHandler = async () => {
-  // Let's pretend this is an ajax request:
-  await new Promise((r) => setTimeout(r, 1000));
-  submitted.value = true;
+  const data = await axios.post("http://localhost:5000/api/v1/users/register", {
+    name: formData.value.name,
+    email: formData.value.email,
+    password: formData.value.password,
+    passwordConfirm: formData.value.password_confirm,
+  });
+
+  console.log("data", data);
 
   console.log("Submitted data", formData.value);
 };
